@@ -1,3 +1,2 @@
 jdbc:derby://localhost:1527/db1
 jdbc:derby://localhost:1527/db1;create=true
-say hi
