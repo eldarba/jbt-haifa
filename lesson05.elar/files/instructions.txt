@@ -1,0 +1,31 @@
+company_coupon
+company_id	coupon_id
+101		111
+101		222
+102		333
+102		444
+
+=== company_coupon table ===
+CREATE TABLE company_coupon(
+company_id BIGINT,
+coupon_id BIGINT,
+PRIMARY KEY(company_id, coupon_id) 
+)
+
+1. build the database
+2. define a specialized exception for the system - CouponSystemException
+	a. define a class named CouponSystemException
+	b. extends Exception
+	c. add 
+	private static final long serialVersionUID = 1L;
+	d. generate constructors from super class
+
+3. start defining the connection pool class
+
+
+
+
+
+
+
+
