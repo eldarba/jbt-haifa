@@ -3,6 +3,7 @@ package aop.core.aspects;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -36,6 +37,11 @@ public class SmsAspect2 {
 	public void afterThrowingReadAllCompanies(JoinPoint jp, Throwable error) {
 		System.out.println("===>perform @AfterThrowing on method: " + jp.getSignature());
 		System.out.println("===>error : " + error);
+	}
+
+	@After("execution(* readAllCompanies())")
+	public void afterFinallyReadAllCompanies(JoinPoint jp) {
+		System.out.println("===>perform @After finnaly on method: " + jp.getSignature());
 	}
 
 }
