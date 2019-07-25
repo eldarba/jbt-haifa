@@ -3,9 +3,11 @@ package aop.core.aspects;
 import java.util.List;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.core.annotation.Order;
@@ -17,6 +19,18 @@ import aop.core.dao.Company;
 @Order(2)
 @Component
 public class SmsAspect2 {
+
+	@Around("execution(* displayTraficForcast(..))")
+	public Object aroundForcastService(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		// this code runs before
+		System.out.println("===>perform @Around on method: " + proceedingJoinPoint.getSignature());
+		long ts1 = System.currentTimeMillis();
+		Object result = proceedingJoinPoint.proceed();
+		// this code runs after
+		long ts2 = System.currentTimeMillis();
+		System.out.println("===>perform @Around: total time: " + (ts2 - ts1) / 1000 + " seconds");
+		return result;
+	}
 
 	@Before("MyPointcuts.AllDaoPackageNoGetSet()")
 	public void smsAlert(JoinPoint jp) {
