@@ -25,6 +25,11 @@ public class SimpleRestService {
 	public String speak() {
 		return "bla bla";
 	}
+	@GetMapping("/rand")
+	public String rand() {
+		int x = (int) (Math.random()*101);
+		return "Your lucky number is: " + x;
+	}
 	
 	
 }
