@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
-@ComponentScan(basePackages = { "dao package" })
+@ComponentScan
 @PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 public class AppConfig {

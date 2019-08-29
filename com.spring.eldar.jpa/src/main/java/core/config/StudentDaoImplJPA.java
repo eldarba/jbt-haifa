@@ -57,10 +57,16 @@ public class StudentDaoImplJPA implements StudentDao {
 		em.remove(std);
 	}
 
+	/**
+	 * the method get a student (assumed not persistent) and find a representation
+	 * of this student in the database. if found update according to state of
+	 * student parameter
+	 */
 	@Override
 	public void updateStudent(Student student) {
-		// TODO Auto-generated method stub
-
+		Student stdFromDb = getStudent(student.getId());
+		stdFromDb.setName(student.getName());
+		stdFromDb.setEmail(student.getEmail());
 	}
 
 }

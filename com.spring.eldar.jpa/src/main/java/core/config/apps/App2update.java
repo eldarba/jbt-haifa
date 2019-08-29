@@ -6,16 +6,18 @@ import core.config.AppConfig;
 import core.config.Student;
 import core.config.StudentDao;
 
-public class App1Create {
+public class App2update {
 
 	public static void main(String[] args) {
 
 		// start Spring application context to get Spring beans
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
 			StudentDao studentDao = ctx.getBean(StudentDao.class);
-			Student student = new Student("John", "john@mail");
-			studentDao.saveStudent(student);
-			System.out.println(student + " saved");
+			Student student = studentDao.getStudent(2);
+			student.setName("LEA");
+
+			studentDao.updateStudent(student);
+			System.out.println(student + " updated");
 		}
 
 	}
