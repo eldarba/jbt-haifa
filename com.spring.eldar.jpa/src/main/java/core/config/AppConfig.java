@@ -24,6 +24,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableTransactionManagement
 public class AppConfig {
 
+	// spring helper class for the config data
 	@Autowired
 	private Environment env;
 
