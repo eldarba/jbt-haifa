@@ -5,12 +5,14 @@ import java.util.Scanner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.eldar.parkinglot.beans.Car;
 import com.eldar.parkinglot.beans.ParkingLot;
 
 @Configuration
 @ComponentScan
+@EnableAspectJAutoProxy
 public class AppConfig {
 
 	public static void main(String[] args) {

@@ -1,0 +1,31 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+
+		<!-- JDBC Database connection settings derby -->
+		<property name="connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+		<property name="connection.url">jdbc:derby://localhost:1527/db1;create=true</property>
+		<!-- create table student(id int primary key GENERATED ALWAYS AS IDENTITY 
+			(START WITH 1, INCREMENT BY 1), name varchar(25), email varchar(25)) -->
+		<!-- <property name="connection.username">eldar1</property> <property name="connection.password">pass1</property> -->
+
+		<!-- JDBC connection pool settings ... using built-in test pool -->
+		<property name="connection.pool_size">1</property>
+
+		<!-- SQL dialect for derby -->
+		<property name="dialect">org.hibernate.dialect.DerbyDialect</property>
+
+		<!-- Echo the SQL to stdout -->
+		<property name="show_sql">true</property>
+
+		<!-- Set the current session context -->
+		<property name="current_session_context_class">thread</property>
+
+	</session-factory>
+
+</hibernate-configuration>
