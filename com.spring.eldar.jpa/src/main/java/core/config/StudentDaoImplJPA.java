@@ -30,8 +30,9 @@ public class StudentDaoImplJPA implements StudentDao {
 	}
 
 	@Override
+	@Transactional
 	public void saveStudent(Student student) {
-
+		em.persist(student);
 	}
 
 	@Override
