@@ -11,14 +11,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
 @ComponentScan
 @PropertySource("classpath:application.properties")
+@EnableTransactionManagement
 public class AppConfig {
 
 	@Autowired
@@ -60,6 +63,14 @@ public class AppConfig {
 		props.setProperty("hibernate.hbm2ddl.auto", "update");
 		emf.setJpaProperties(props);
 		return emf;
+	}
+
+	// bean 3: transaction manager
+	@Bean
+	public JpaTransactionManager transactionManager() {
+		JpaTransactionManager tm = new JpaTransactionManager();
+		tm.setEntityManagerFactory(entityManagerFactory().getObject());
+		return tm;
 	}
 
 }
