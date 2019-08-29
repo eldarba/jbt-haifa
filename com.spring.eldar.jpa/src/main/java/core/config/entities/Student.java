@@ -1,4 +1,4 @@
-package core.config;
+package core.config.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

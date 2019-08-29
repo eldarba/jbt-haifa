@@ -1,4 +1,4 @@
-package core.config;
+package core.config.dao;
 
 import java.util.List;
 
@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+
+import core.config.entities.Student;
 
 @Repository
 @Primary
