@@ -7,12 +7,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.annotation.Order;
 
-import com.eldar.spring.data.jpa.dao.StudentDAO;
-import com.eldar.spring.data.jpa.entities.Student;
+import com.eldar.spring.data.jpa.dao.StudentRepository;
 
-@Order(2)
+@Order(4)
 @SpringBootApplication
-public class App1 implements ApplicationContextAware, CommandLineRunner {
+public class App4 implements ApplicationContextAware, CommandLineRunner {
 
 	private static ApplicationContext ctx;
 
@@ -23,12 +22,13 @@ public class App1 implements ApplicationContextAware, CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("============== start app 1...");
-		StudentDAO studentDAO = ctx.getBean(StudentDAO.class);
-		Student student1 = new Student("aaa", "aaaMail");
-		Student student2 = new Student("bbb", "bbbMail");
-//		studentDAO.save(student1);
-//		studentDAO.save(student2);
+		System.out.println("============== start app 4...");
+		StudentRepository studentDAO = ctx.getBean(StudentRepository.class);
+
+		int id = 5;
+//		Student std = studentDAO.getOne(id);
+//		System.out.println(std);
+
 	}
 
 	@Override

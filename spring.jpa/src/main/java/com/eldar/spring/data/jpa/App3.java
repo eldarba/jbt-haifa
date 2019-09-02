@@ -10,9 +10,9 @@ import org.springframework.core.annotation.Order;
 import com.eldar.spring.data.jpa.dao.StudentDAO;
 import com.eldar.spring.data.jpa.entities.Student;
 
-@Order(2)
+@Order(3)
 @SpringBootApplication
-public class App1 implements ApplicationContextAware, CommandLineRunner {
+public class App3 implements ApplicationContextAware, CommandLineRunner {
 
 	private static ApplicationContext ctx;
 
@@ -23,12 +23,10 @@ public class App1 implements ApplicationContextAware, CommandLineRunner {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("============== start app 1...");
+		System.out.println("============== start app 2...");
 		StudentDAO studentDAO = ctx.getBean(StudentDAO.class);
-		Student student1 = new Student("aaa", "aaaMail");
-		Student student2 = new Student("bbb", "bbbMail");
-//		studentDAO.save(student1);
-//		studentDAO.save(student2);
+		Student std = studentDAO.findById(5);
+		System.out.println(std);
 	}
 
 	@Override
