@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import core.config.AppConfig;
-import core.config.Student;
-import core.config.StudentDao;
+import core.config.dao.StudentDao;
+import core.config.entities.Student;
 
 public class App4getAllStudents {
 

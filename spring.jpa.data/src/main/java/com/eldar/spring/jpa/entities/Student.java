@@ -1,4 +1,4 @@
-package core.config;
+package com.eldar.spring.jpa.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

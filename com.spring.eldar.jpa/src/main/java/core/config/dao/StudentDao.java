@@ -1,6 +1,8 @@
-package core.config;
+package core.config.dao;
 
 import java.util.List;
+
+import core.config.entities.Student;
 
 public interface StudentDao {
 

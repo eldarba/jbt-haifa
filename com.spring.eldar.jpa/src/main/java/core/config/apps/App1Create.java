@@ -3,8 +3,8 @@ package core.config.apps;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import core.config.AppConfig;
-import core.config.Student;
-import core.config.StudentDao;
+import core.config.dao.StudentDao;
+import core.config.entities.Student;
 
 public class App1Create {
 
@@ -13,7 +13,7 @@ public class App1Create {
 		// start Spring application context to get Spring beans
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
 			StudentDao studentDao = ctx.getBean(StudentDao.class);
-			Student student = new Student("John", "john@mail");
+			Student student = new Student("Lea", "lea@mail");
 			studentDao.saveStudent(student);
 			System.out.println(student + " saved");
 		}

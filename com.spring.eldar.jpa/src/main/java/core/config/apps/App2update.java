@@ -3,8 +3,8 @@ package core.config.apps;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import core.config.AppConfig;
-import core.config.Student;
-import core.config.StudentDao;
+import core.config.dao.StudentDao;
+import core.config.entities.Student;
 
 public class App2update {
 
@@ -14,7 +14,7 @@ public class App2update {
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class)) {
 			StudentDao studentDao = ctx.getBean(StudentDao.class);
 			Student student = studentDao.getStudent(2);
-			student.setName("LEA");
+			student.setName("RON");
 
 			studentDao.updateStudent(student);
 			System.out.println(student + " updated");

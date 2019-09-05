@@ -55,7 +55,7 @@ public class AppConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
 		emf.setDataSource(dataSource());
-		emf.setPackagesToScan("core.config", "a"); // the packages of the entity classes
+		emf.setPackagesToScan("core.config.entities", "a"); // the packages of the entity classes
 		emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter()); // Hibernate implementation
 		// add more properties
 		Properties props = new Properties();
