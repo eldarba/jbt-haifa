@@ -17,6 +17,12 @@ public class Person {
 		super();
 	}
 
+	public Person(String name, int age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -16,23 +16,25 @@ import org.glassfish.jersey.client.ClientConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class ClientController {
+// business delegate
+public class BusinessDelegate {
 
 	private ClientConfig clientConfig = new ClientConfig();
 	private Client client = ClientBuilder.newClient(clientConfig);
-	private WebTarget webTargetIncome = client.target("http://localhost:8080/api/");
+	private WebTarget webTarget = client.target("http://localhost:8080/api/");
 	private ObjectMapper objectMapper = new ObjectMapper();
 
 	public Person createPerson(Person person) throws JsonProcessingException {
-		Entity<String> personAsJson = Entity.json(objectMapper.writeValueAsString(person));
-		Builder builder = webTargetIncome.path("person").request();
+		String str = objectMapper.writeValueAsString(person);
+		Entity<String> personAsJson = Entity.json(str);
+		Builder builder = webTarget.path("person").request();
 		Response response = builder.post(personAsJson);
 		Person result = response.readEntity(Person.class);
 		return result;
 	}
 
 	public Person readPerson(int id) {
-		Builder builder = webTargetIncome.path("person/" + id).request(MediaType.APPLICATION_JSON);
+		Builder builder = webTarget.path("person/" + id).request(MediaType.APPLICATION_JSON);
 		Response response = builder.get(Response.class);
 		Person person = response.readEntity(new GenericType<Person>() {
 		});
@@ -40,7 +42,7 @@ public class ClientController {
 	}
 
 	public List<Person> readAllPerson() {
-		Builder builder = webTargetIncome.path("person-all").request(MediaType.APPLICATION_JSON);
+		Builder builder = webTarget.path("person-all").request(MediaType.APPLICATION_JSON);
 		Response response = builder.get(Response.class);
 		List<Person> list = response.readEntity(new GenericType<List<Person>>() {
 		});
@@ -49,14 +51,14 @@ public class ClientController {
 
 	public Person updatePerson(Person person) throws JsonProcessingException {
 		Entity<String> personAsJson = Entity.json(objectMapper.writeValueAsString(person));
-		Builder builder = webTargetIncome.path("person").request();
+		Builder builder = webTarget.path("person").request();
 		Response response = builder.put(personAsJson);
 		Person result = response.readEntity(Person.class);
 		return result;
 	}
 
 	public Person deletePerson(int id) {
-		Builder builder = webTargetIncome.path("person/" + id).request(MediaType.APPLICATION_JSON);
+		Builder builder = webTarget.path("person/" + id).request(MediaType.APPLICATION_JSON);
 		Response response = builder.delete(Response.class);
 		Person person = response.readEntity(new GenericType<Person>() {
 		});
