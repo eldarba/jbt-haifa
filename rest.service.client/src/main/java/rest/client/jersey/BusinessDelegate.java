@@ -50,11 +50,15 @@ public class BusinessDelegate {
 	}
 
 	public Person updatePerson(Person person) throws JsonProcessingException {
-		Entity<String> personAsJson = Entity.json(objectMapper.writeValueAsString(person));
+		Entity<Person> personAsPojo = Entity.json(person);
 		Builder builder = webTarget.path("person").request();
-		Response response = builder.put(personAsJson);
-		Person result = response.readEntity(Person.class);
-		return result;
+		Response response = builder.put(personAsPojo);
+		if (response.getStatusInfo().toEnum() == Response.Status.OK) {
+			Person result = response.readEntity(Person.class);
+			return result;
+		} else {
+			throw new RuntimeException("updatePerson failed: " + response.getStatusInfo());
+		}
 	}
 
 	public Person deletePerson(int id) {
