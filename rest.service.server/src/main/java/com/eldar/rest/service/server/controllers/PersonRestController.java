@@ -1,6 +1,7 @@
 package com.eldar.rest.service.server.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +22,6 @@ public class PersonRestController {
 	@Autowired
 	private PersonRepository personRepository;
 
-//	@PostMapping("person")
-//	@PutMapping("person")
 	@RequestMapping(value = "person", method = { RequestMethod.POST, RequestMethod.PUT })
 	public Person create(@RequestBody Person person) {
 		personRepository.save(person);
@@ -36,7 +35,9 @@ public class PersonRestController {
 
 	@GetMapping("person/{id}")
 	public Person viewById(@PathVariable("id") int id) {
-		return personRepository.findById(id).get();
+		Optional<Person> optPerson = personRepository.findById(id);
+		Person person = optPerson.isPresent() ? optPerson.get() : null;
+		return person;
 	}
 
 	@DeleteMapping("person/{id}")
