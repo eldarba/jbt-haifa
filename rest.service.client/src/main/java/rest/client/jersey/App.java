@@ -10,16 +10,21 @@ public class App {
 		BusinessDelegateShortVersion delegate = new BusinessDelegateShortVersion();
 		// create
 //		{
-//			Person person = new Person("Dan", 50);
+//			Person person = new Person("David", 34);
 //			Person p = delegate.createPerson(person);
-//			System.out.println(p);
+//			System.out.println("Added: " + p);
 //		}
 
 		// read all
 		{
 			java.util.List<Person> persons = delegate.readAllPerson();
-			for (Person person : persons) {
-				System.out.println(person);
+			if (!persons.isEmpty()) {
+				System.out.println("=== all persons ===");
+				for (Person person : persons) {
+					System.out.println(person);
+				}
+			} else {
+				System.out.println("There are no persons");
 			}
 		}
 
@@ -37,15 +42,15 @@ public class App {
 //		}
 
 		// delete
-		{
-			int id = 9;
-			Person p = delegate.deletePerson(id);
-			if (p != null) {
-				System.out.println("deleted person " + id + ": " + p);
-			} else {
-				System.out.println("did not deleted person " + id + ": not found: " + p);
-			}
-		}
+//		{
+//			int id = 9;
+//			Person p = delegate.deletePerson(id);
+//			if (p != null) {
+//				System.out.println("deleted person " + id + ": " + p);
+//			} else {
+//				System.out.println("did not deleted person " + id + ": not found: " + p);
+//			}
+//		}
 
 		System.out.println("end");
 	}
