@@ -10,18 +10,18 @@ public class App {
 		BusinessDelegateShortVersion delegate = new BusinessDelegateShortVersion();
 		// create
 //		{
-//			Person person = new Person("John", 50);
+//			Person person = new Person("Dan", 50);
 //			Person p = delegate.createPerson(person);
 //			System.out.println(p);
 //		}
 
 		// read all
-//		{
-//			java.util.List<Person> persons = delegate.readAllPerson();
-//			for (Person person : persons) {
-//				System.out.println(person);
-//			}
-//		}
+		{
+			java.util.List<Person> persons = delegate.readAllPerson();
+			for (Person person : persons) {
+				System.out.println(person);
+			}
+		}
 
 		// read one
 //		{

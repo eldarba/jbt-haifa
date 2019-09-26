@@ -10,7 +10,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
-// business delegate
+// business delegate - this class is client code (using an external web service)
 public class BusinessDelegate {
 
 //	private ClientConfig clientConfig = new ClientConfig();
@@ -39,7 +39,7 @@ public class BusinessDelegate {
 
 	/** read person of specified id. returns null if not exist */
 	public Person readPerson(int id) {
-//		Builder builder = webTarget.path("person/" + id).request(MediaType.APPLICATION_JSON);
+//		Builder requestBuilder = webTarget.path("person/" + id).request(MediaType.APPLICATION_JSON);
 		Builder requestBuilder = webTarget.path("person/" + id).request();
 //		Response response = requestBuilder.get(Response.class);
 		Response response = requestBuilder.get();

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eldar.rest.service.server.entities.Person;
 import com.eldar.rest.service.server.repositories.PersonRepository;
 
+// http://localhost:8888/api
 @RestController
 @RequestMapping("api/")
 public class PersonRestController {
@@ -22,12 +23,14 @@ public class PersonRestController {
 	@Autowired
 	private PersonRepository personRepository;
 
+	// http://localhost:8888/api/person
 	@RequestMapping(value = "person", method = { RequestMethod.POST, RequestMethod.PUT })
 	public Person create(@RequestBody Person person) {
 		personRepository.save(person);
 		return person;
 	}
 
+	// http://localhost:8888/api/person-all
 	@GetMapping("person-all")
 	public List<Person> viewAll() {
 		return personRepository.findAll();
