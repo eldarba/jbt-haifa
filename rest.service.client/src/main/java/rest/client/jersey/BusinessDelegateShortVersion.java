@@ -5,31 +5,20 @@ import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
-// business delegate - this class is client code (using an external web service)
-public class BusinessDelegate {
+public class BusinessDelegateShortVersion {
 
-//	private ClientConfig clientConfig = new ClientConfig();
-//	private Client client = ClientBuilder.newClient(clientConfig);
 	private Client client = ClientBuilder.newClient();
 	private WebTarget webTarget = client.target("http://localhost:8080/api/");
-	// private ObjectMapper objectMapper = new ObjectMapper();
 
 	/** create a new person */
 	public Person createPerson(Person person) {
-//		String str = objectMapper.writeValueAsString(person);
-//		Entity<String> personAsJson = Entity.json(str);
-		Entity<Person> personEntity = Entity.json(person);
-		Builder requestBuilder = webTarget.path("person").request();
-//		Response response = requestBuilder.post(personAsJson);
-		Response response = requestBuilder.post(personEntity);
+		Response response = webTarget.path("person").request().post(Entity.json(person));
 		if (response.getStatusInfo().toEnum() == Response.Status.OK) {
-			person = response.readEntity(Person.class);
-			return person;
+			return response.readEntity(Person.class);
 		} else {
 			int statusCode = response.getStatus();
 			String reason = response.getStatusInfo().getReasonPhrase();
@@ -39,16 +28,9 @@ public class BusinessDelegate {
 
 	/** read person of specified id. returns null if not exist */
 	public Person readPerson(int id) {
-//		Builder requestBuilder = webTarget.path("person/" + id).request(MediaType.APPLICATION_JSON);
-		Builder requestBuilder = webTarget.path("person/" + id).request();
-//		Response response = requestBuilder.get(Response.class);
-		Response response = requestBuilder.get();
+		Response response = webTarget.path("person/" + id).request().get();
 		if (response.getStatusInfo().toEnum() == Response.Status.OK) {
-//			GenericType<Person> type = new GenericType<Person>() {
-//			};
-//			Person person = response.readEntity(type);
-			Person person = response.readEntity(Person.class);
-			return person;
+			return response.readEntity(Person.class);
 		} else {
 			int statusCode = response.getStatus();
 			String reason = response.getStatusInfo().getReasonPhrase();
@@ -58,13 +40,15 @@ public class BusinessDelegate {
 
 	/** read all persons */
 	public List<Person> readAllPerson() {
-		Builder requestBuilder = webTarget.path("person-all").request();
-//		Response response = requestBuilder.get(Response.class);
-		Response response = requestBuilder.get();
-		GenericType<List<Person>> listType = new GenericType<List<Person>>() {
-		};
-		List<Person> list = response.readEntity(listType);
-		return list;
+		Response response = webTarget.path("person-all").request().get();
+		if (response.getStatusInfo().toEnum() == Response.Status.OK) {
+			return response.readEntity(new GenericType<List<Person>>() {
+			});
+		} else {
+			int statusCode = response.getStatus();
+			String reason = response.getStatusInfo().getReasonPhrase();
+			throw new RuntimeException("readAllPerson failed: " + statusCode + ": " + reason);
+		}
 	}
 
 	/**
@@ -72,9 +56,7 @@ public class BusinessDelegate {
 	 * new person
 	 */
 	public Person updatePerson(Person person) {
-		Entity<Person> personEntity = Entity.json(person);
-		Builder requestBuilder = webTarget.path("person").request();
-		Response response = requestBuilder.put(personEntity);
+		Response response = webTarget.path("person").request().put(Entity.json(person));
 		if (response.getStatusInfo().toEnum() == Response.Status.OK) {
 			person = response.readEntity(Person.class);
 			return person;
@@ -90,9 +72,8 @@ public class BusinessDelegate {
 	 * person not found returns null
 	 */
 	public Person deletePerson(int id) {
-		Builder requestBuilder = webTarget.path("person/" + id).request();
 		Person person = readPerson(id);
-		Response response = requestBuilder.delete();
+		Response response = webTarget.path("person/" + id).request().delete();
 		if (response.getStatusInfo().toEnum() == Response.Status.OK) {
 			return person;
 		} else {
